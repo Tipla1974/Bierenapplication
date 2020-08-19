@@ -5,6 +5,6 @@
 
 @foreach (var bier in Model)
 {
-    @bier.ID@:. @bier.Naam  (@bier.Alcohol )
-<br />
+<p> @Html.DisplayFor(m => bier.ID)  @bier.Naam  (@Html.DisplayFor(m => bier.Alcohol) )</p>
+
 }

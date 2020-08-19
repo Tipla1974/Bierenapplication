@@ -29,6 +29,12 @@ namespace Bierenapplication.Controllers
                 Naam = "Jupiler",
                 Alcohol = 5.2F
             });
+            bieren.Add(new Bier
+            {
+                ID = 41,
+                Naam = "Kasteelbier",
+                Alcohol = 11F
+            });
             return View(bieren);
         }
     }
