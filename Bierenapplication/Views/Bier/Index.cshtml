@@ -1,0 +1,10 @@
+﻿
+@model List<Bier>
+
+<h2>Alle Bieren</h2>
+
+@foreach (var bier in Model)
+{
+    @bier.ID@:. @bier.Naam  (@bier.Alcohol )
+<br />
+}
