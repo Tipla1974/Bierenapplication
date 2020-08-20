@@ -4,38 +4,46 @@ using System.Linq;
 using System.Threading.Tasks;
 using Bierenapplication.Models;
 using Microsoft.AspNetCore.Mvc;
+using Bierenapplication.Services;
+
+using Newtonsoft.Json;
 
 namespace Bierenapplication.Controllers
 {
     public class BierController : Controller
     {
+        private BierService _bierService;
+        public BierController(BierService bierService)
+        {
+            _bierService = bierService;
+        }
         public IActionResult Index()
         {
-            var bieren = new List<Bier>();
-            bieren.Add(new Bier {
-                ID = 22,
-                Naam = "Kruger",
-                Alcohol = 4.8F
-            }) ;
-            bieren.Add(new Bier
-            {
-                ID = 23,
-                Naam = "Duvel",
-                Alcohol = 8F
-            });
-            bieren.Add(new Bier
-            {
-                ID = 40,
-                Naam = "Jupiler",
-                Alcohol = 5.2F
-            });
-            bieren.Add(new Bier
-            {
-                ID = 41,
-                Naam = "Kasteelbier",
-                Alcohol = 11F
-            });
+            var bieren = _bierService.Findall();
             return View(bieren);
+        }
+        public IActionResult Bieren()
+        {
+            return View(_bierService.Findall());
+        }
+        public IActionResult Verwijderen(int id)
+        {
+            var bier = _bierService.Read(id);
+            return View(bier);
+        }
+        [HttpPost]
+        public IActionResult Delete(int id)
+        {
+            var bier = _bierService.Read(id);
+            this.TempData["bier"] = JsonConvert.SerializeObject(bier);
+            _bierService.delete(id);
+            return Redirect("~/Bier/Verwijderd");
+        }
+        public IActionResult Verwijderd()
+        {
+            var bier = JsonConvert.DeserializeObject<Bier>(
+                (string)this.TempData["bier"]);
+            return View(bier);
         }
     }
 }

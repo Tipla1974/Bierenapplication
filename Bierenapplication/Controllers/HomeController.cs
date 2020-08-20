@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Bierenapplication.Models;
+using Bierenapplication.Services;
 
 namespace Bierenapplication.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private BierService _bierService;
+        public HomeController(BierService bierService)
         {
-            _logger = logger;
+            _bierService = bierService;
         }
 
         public IActionResult Index()
@@ -26,6 +26,10 @@ namespace Bierenapplication.Controllers
         public IActionResult Privacy()
         {
             return View();
+        }
+        public IActionResult Bieren()
+        {
+            return View(_bierService.Findall());
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

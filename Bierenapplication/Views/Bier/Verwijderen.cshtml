@@ -1,0 +1,9 @@
+﻿
+@model Bier
+@{
+    ViewBag.title = "Verwijderen";
+}
+<h2>@Model.Naam verwijderen?</h2>
+<form method="post" action="~/Bier/Delete/@Model.ID">
+    <input type="submit" value="Delete" />
+</form>

@@ -5,6 +5,9 @@
 
 @foreach (var bier in Model)
 {
-<p> @Html.DisplayFor(m => bier.ID)  @bier.Naam  (@Html.DisplayFor(m => bier.Alcohol) )</p>
-
+    var url = "Bier/Verwijderen/" + bier.ID; 
+<li>
+    @Html.DisplayFor(m=>bier.ID) @bier.Naam @Html.DisplayFor(m => bier.Alcohol)
+    <a href="~/@url"><img src="~/Images/delete.png" alt="Verwijdren"/></a> 
+</li>
 }
