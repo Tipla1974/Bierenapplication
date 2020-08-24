@@ -57,6 +57,10 @@ namespace Bierenapplication.Services
         {
             bieren.Remove(id);
         }
-
+        public void Add(Bier p)
+        {
+            p.ID = bieren.Keys.Max() + 1;
+            bieren.Add(p.ID, p);
+        }
     }
 }

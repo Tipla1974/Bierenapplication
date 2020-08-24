@@ -1,13 +1,32 @@
 ﻿
-@model List<Bier>
-
-<h2>Alle Bieren</h2>
-
-@foreach (var bier in Model)
-{
-    var url = "Bier/Verwijderen/" + bier.ID; 
-<li>
-    @Html.DisplayFor(m=>bier.ID) @bier.Naam @Html.DisplayFor(m => bier.Alcohol)
-    <a href="~/@url"><img src="~/Images/delete.png" alt="Verwijdren"/></a> 
-</li>
+@model IEnumerable<Bier>
+@{
+    ViewBag.title = "Bieren";
 }
+
+<h2>Bieren</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(m => m.ID)</th>
+            <th>@Html.DisplayNameFor(m => m.Naam)</th>
+            <th>@Html.DisplayNameFor(m => m.Alcohol)</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var bier in Model)
+        {
+
+            <tr>
+                <td>@Html.DisplayFor(m => bier.ID)</td> 
+                <td> @Html.DisplayFor(m => bier.Naam)</td>
+                <td>@Html.DisplayFor(m => bier.Alcohol)</td>
+
+            </tr>
+
+        }
+
+    </tbody>
+</table>
+ <a asp-action="Toevoegen" class="btn btn-primary">Bier toevoegen</a>

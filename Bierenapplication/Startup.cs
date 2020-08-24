@@ -24,6 +24,7 @@ namespace Bierenapplication
         {
             
             services.AddSingleton<Services.BierService>();
+            services.AddSession();
             services.AddControllersWithViews();
         }
 

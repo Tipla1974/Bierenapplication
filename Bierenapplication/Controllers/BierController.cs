@@ -45,5 +45,20 @@ namespace Bierenapplication.Controllers
                 (string)this.TempData["bier"]);
             return View(bier);
         }
+        public IActionResult Toevoegen()
+        {
+            var bier = new Bier();
+            return View(bier);
+        }
+        [HttpPost]
+        public IActionResult Toevoegen(Bier p) 
+        { 
+            if (this.ModelState.IsValid) 
+            { 
+                _bierService.Add(p); 
+                return RedirectToAction("Index"); 
+            } 
+            else return View(p); 
+        }
     }
 }
